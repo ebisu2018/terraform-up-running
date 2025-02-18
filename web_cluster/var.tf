@@ -30,6 +30,10 @@ variable "desired" {
   type = number
 }
 
+variable "user_data_script" {
+  type = string
+}
+
 locals {
   http_port = 80
   any_port = 0
