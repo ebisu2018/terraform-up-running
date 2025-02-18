@@ -1,5 +1,5 @@
 resource "aws_security_group" "instance-sg" {
-  name = "${var.cluster_name}-sg"
+  name = "${var.cluster_name}-sg-v2"
 }
 
 
