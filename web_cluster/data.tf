@@ -18,7 +18,7 @@ data "aws_subnets" "default" {
 #   }
 # }
 
-data "template_file" "user-data" {
-  template = file(var.user_data_script)
-  vars = {}
-}
+# data "template_file" "user-data" {
+#   template = file(var.user_data_script)
+#   vars = {}
+# }
