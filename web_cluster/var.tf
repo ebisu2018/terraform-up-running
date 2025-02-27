@@ -34,6 +34,11 @@ variable "user_data_script" {
   type = string
 }
 
+variable "enable_autoscaling" {
+  type = bool
+  default = false
+}
+
 locals {
   http_port = 80
   any_port = 0

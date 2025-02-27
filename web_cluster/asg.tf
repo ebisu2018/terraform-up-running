@@ -22,3 +22,25 @@ resource "aws_autoscaling_group" "asg-demo" {
     id = aws_launch_template.instance-tpl.id
   }
 }
+
+resource "aws_autoscaling_schedule" "scale_out_during_busy_hours" {
+  count = var.enable_autoscaling ? 1 : 0
+
+  autoscaling_group_name = aws_autoscaling_group.asg-demo.name
+  scheduled_action_name  = "${var.cluster_name}-scale-out-during-busy-hours"
+  min_size = 2
+  max_size = 10
+  desired_capacity = 10
+  recurrence = "0 9 * * *"
+}
+
+resource "aws_autoscaling_schedule" "scale_in_at_night" {
+  count = var.enable_autoscaling ? 1 : 0
+
+  autoscaling_group_name = aws_autoscaling_group.asg-demo.name
+  scheduled_action_name  = "${var.cluster_name}-scale_in_at_night"
+  min_size = 2
+  max_size = 10
+  desired_capacity = 2
+  recurrence = "0 17 * * *"
+}
