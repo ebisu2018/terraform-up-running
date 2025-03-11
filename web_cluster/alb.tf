@@ -8,7 +8,7 @@ resource "aws_lb" "demo-lb" {
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.demo-lb.arn
-  port = 80
+  port = local.http_port
   protocol = "HTTP"
   default_action {
     type = "fixed-response"
