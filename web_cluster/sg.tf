@@ -1,10 +1,10 @@
 resource "aws_security_group" "instance-sg" {
-  name = "${var.cluster_name}-sg-v2"
+  name = "${var.cluster_name}-sg"
 }
 
 
 resource "aws_security_group_rule" "asg_rule" {
-  from_port         = local.any_port
+  from_port         = local.http_port
   protocol          = local.tcp_protocol
   security_group_id = aws_security_group.instance-sg.id
   to_port           = local.any_port
@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "asg_rule" {
 
 
 resource "aws_security_group" "alb-sg" {
-  name = "${var.cluster_name}-alb-sg-v2"
+  name = "${var.cluster_name}-alb-sg"
 }
 
 
