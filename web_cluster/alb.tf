@@ -8,7 +8,7 @@ resource "aws_lb" "demo-lb" {
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.demo-lb.arn
-  port = local.http_port
+  port = local.any_port
   protocol = "HTTP"
   default_action {
     type = "fixed-response"
@@ -23,7 +23,7 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_lb_target_group" "asg-tg" {
   name = "${var.cluster_name}-tg"
-  port = local.http_port
+  port = local.any_port
   protocol = "HTTP"
   vpc_id = data.aws_vpc.default.id
 

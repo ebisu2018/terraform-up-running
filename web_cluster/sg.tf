@@ -4,10 +4,10 @@ resource "aws_security_group" "instance-sg" {
 
 
 resource "aws_security_group_rule" "allow_server_http_inbound" {
-  from_port         = local.http_port
-  protocol          = local.tcp_protocol
+  from_port         = local.any_port
+  protocol          = local.any_protocol
   security_group_id = aws_security_group.instance-sg.id
-  to_port           = local.http_port
+  to_port           = local.any_port
   type              = "ingress"
   cidr_blocks = local.all_ips
 }
@@ -19,10 +19,10 @@ resource "aws_security_group" "alb-sg" {
 
 
 resource "aws_security_group_rule" "allow_http_inbound" {
-  from_port         = local.http_port
-  protocol          = local.tcp_protocol
+  from_port         = local.any_port
+  protocol          = local.any_protocol
   security_group_id = aws_security_group.alb-sg.id
-  to_port           = local.http_port
+  to_port           = local.any_port
   cidr_blocks = local.all_ips
   type              = "ingress"
 }
