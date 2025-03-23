@@ -3,12 +3,21 @@ resource "aws_security_group" "instance-sg" {
 }
 
 
-resource "aws_security_group_rule" "allow_server_http_inbound" {
+resource "aws_security_group_rule" "allow_instance_inbound" {
   from_port         = local.any_port
   protocol          = local.any_protocol
   security_group_id = aws_security_group.instance-sg.id
   to_port           = local.any_port
   type              = "ingress"
+  cidr_blocks = local.all_ips
+}
+
+resource "aws_security_group_rule" "allow_instance_outbound" {
+  from_port         = local.any_port
+  protocol          = local.any_protocol
+  security_group_id = aws_security_group.instance-sg.id
+  to_port           = local.any_port
+  type              = "egress"
   cidr_blocks = local.all_ips
 }
 
