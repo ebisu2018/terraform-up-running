@@ -2,6 +2,10 @@ variable "alb_name" {
   type = string
 }
 
+variable "subnet_ids" {
+  type = list(string)
+}
+
 # variable "db_remote_state_bucket" {
 #   type = string
 # }

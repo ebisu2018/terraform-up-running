@@ -1,5 +1,5 @@
 resource "aws_launch_template" "instance-tpl" {
-  image_id = var.ami_id
+  image_id = var.ami
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.instance-sg.id]
 
@@ -8,7 +8,6 @@ resource "aws_launch_template" "instance-tpl" {
     create_before_destroy = true
   }
 }
-
 
 resource "aws_autoscaling_group" "asg-group" {
   name = "${var.cluster_name}-${aws_launch_template.instance-tpl.name}"
@@ -48,23 +47,4 @@ resource "aws_autoscaling_schedule" "scale_in_at_night" {
 
 resource "aws_security_group" "instance-sg" {
   name = "${var.cluster_name}-sg"
-}
-
-
-resource "aws_security_group_rule" "allow_instance_inbound" {
-  from_port         = local.any_port
-  protocol          = local.any_protocol
-  security_group_id = aws_security_group.instance-sg.id
-  to_port           = local.any_port
-  type              = "ingress"
-  cidr_blocks = local.all_ips
-}
-
-resource "aws_security_group_rule" "allow_instance_outbound" {
-  from_port         = local.any_port
-  protocol          = local.any_protocol
-  security_group_id = aws_security_group.instance-sg.id
-  to_port           = local.any_port
-  type              = "egress"
-  cidr_blocks = local.all_ips
 }

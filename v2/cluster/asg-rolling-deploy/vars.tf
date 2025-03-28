@@ -1,4 +1,4 @@
-variable "ami_id" {
+variable "ami" {
   type = string
 }
 
@@ -36,9 +36,7 @@ variable "user_data_script" {
 
 variable "enable_autoscaling" {
   type = bool
-  default = false
 }
-
 
 variable "target_group_arns" {
   type = list(string)
@@ -49,10 +47,14 @@ variable "subnet_ids" {
   type = list(string)
 }
 
-locals {
-  http_port = 80
-  any_port = 0
-  any_protocol = "-1"
-  tcp_protocol = "tcp"
-  all_ips = ["0.0.0.0/0"]
+variable "any_port" {
+  type = number
+}
+
+variable "any_protocol" {
+  type = string
+}
+
+variable "all_ips" {
+  type = list(string)
 }
