@@ -38,15 +38,3 @@ variable "target_group_arns" {
 variable "subnet_ids" {
   type = list(string)
 }
-
-variable "any_port" {
-  type = number
-}
-
-variable "any_protocol" {
-  type = string
-}
-
-variable "all_ips" {
-  type = list(string)
-}
